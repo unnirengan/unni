@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unni Rengan — IT Infrastructure &amp; AI/ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0b1521;
+    --bg-1:#101e30;
+    --bg-2:#16283f;
+    --ink-0:#eaf0f6;
+    --ink-1:#9fb1c4;
+    --ink-2:#6d8098;
+    --teal:#4fd1ae;
+    --amber:#e8b33d;
+    --line:rgba(255,255,255,0.09);
+    --sans:'IBM Plex Sans', system-ui, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--bg-0);
+    color:var(--ink-0);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- background circuit texture ---------- */
+  .grid-bg{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 40%, transparent 85%);
+    opacity:0.5;
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(11,21,33,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .nav-mark{
+    font-family:var(--mono);
+    font-size:14px;
+    color:var(--teal);
+    letter-spacing:0.02em;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--ink-1);
+    font-size:14.5px;
+    transition:color .15s ease;
+  }
+  .nav-links a:hover{ color:var(--ink-0); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:96px 0 88px;
+    border-bottom:1px solid var(--line);
+  }
+  .status-line{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--teal);
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:28px;
+  }
+  .status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--teal);
+    box-shadow:0 0 0 3px rgba(79,209,174,0.18);
+  }
+  h1.name{
+    font-size:clamp(44px, 7vw, 74px);
+    font-weight:700;
+    margin:0 0 18px;
+    letter-spacing:-0.02em;
+    line-height:1.02;
+  }
+  .role{
+    font-size:clamp(18px, 2.4vw, 23px);
+    color:var(--ink-1);
+    max-width:620px;
+    margin:0 0 34px;
+    font-weight:400;
+  }
+  .hero-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px 22px;
+    font-family:var(--mono);
+    font-size:13.5px;
+  }
+  .hero-links a{
+    text-decoration:none;
+    color:var(--ink-0);
+    border-bottom:1px solid var(--ink-2);
+    padding-bottom:2px;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .hero-links a:hover{
+    color:var(--teal);
+    border-color:var(--teal);
+  }
+
+  /* ---------- section shell ---------- */
+  section{
+    padding:76px 0;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:44px;
+    gap:16px;
+  }
+  h2{
+    font-size:28px;
+    font-weight:700;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .section-tag{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-2);
+  }
+  .lede{
+    color:var(--ink-1);
+    max-width:640px;
+    font-size:16.5px;
+  }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:56px;
+  }
+  .about-copy p{
+    color:var(--ink-1);
+    font-size:16.5px;
+    max-width:58ch;
+  }
+  .about-copy p + p{ margin-top:16px; }
+  .about-facts{
+    border-left:2px solid var(--bg-2);
+    padding-left:24px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .fact dt{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-2);
+    margin-bottom:4px;
+  }
+  .fact dd{
+    margin:0;
+    font-size:15px;
+    color:var(--ink-0);
+  }
+  .hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-image {
+  flex: 0 0 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 260px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+  /* ---------- experience timeline ---------- */
+  .timeline{
+    position:relative;
+    padding-left:28px;
+    border-left:1px solid var(--bg-2);
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:44px;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:-33px;
+    top:5px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--bg-0);
+    border:2px solid var(--teal);
+  }
+  .tl-date{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--amber);
+    margin-bottom:6px;
+  }
+  .tl-role{
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 3px;
+  }
+  .tl-org{
+    font-size:14px;
+    color:var(--ink-2);
+    margin-bottom:12px;
+  }
+  .tl-desc{
+    color:var(--ink-1);
+    font-size:15.5px;
+    max-width:64ch;
+  }
+
+  /* ---------- projects ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .project{
+    background:var(--bg-0);
+    padding:30px 28px;
+  }
+  .project-file{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--teal);
+    margin-bottom:14px;
+    word-break:break-all;
+  }
+  .project h3{
+    font-size:18px;
+    margin:0 0 10px;
+    font-weight:600;
+  }
+  .project p{
+    color:var(--ink-1);
+    font-size:15px;
+    margin:0;
+  }
+
+  /* ---------- skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:32px;
+  }
+  .skill-mod h3{
+    font-size:13px;
+    font-family:var(--mono);
+    color:var(--amber);
+    margin:0 0 16px;
+    font-weight:500;
+  }
+  .skill-mod ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .skill-mod li{
+    font-size:14.5px;
+    color:var(--ink-0);
+    padding-left:14px;
+    position:relative;
+  }
+  .skill-mod li::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:8px;
+    width:5px;
+    height:5px;
+    background:var(--teal);
+  }
+
+  /* ---------- education ---------- */
+  .edu-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .edu-item{
+    display:grid;
+    grid-template-columns:120px 1fr auto;
+    gap:24px;
+    align-items:baseline;
+    padding:20px 0;
+    border-top:1px solid var(--bg-2);
+  }
+  .edu-item:last-child{ border-bottom:1px solid var(--bg-2); }
+  .edu-year{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-2);
+  }
+  .edu-degree{ font-size:15.5px; }
+  .edu-org{
+    color:var(--ink-1);
+    font-size:14px;
+    margin-top:3px;
+  }
+  .edu-cgpa{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--teal);
+    white-space:nowrap;
+  }
+
+  /* ---------- certifications ---------- */
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px 40px;
+  }
+  .cert-item{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:13px 0;
+    border-bottom:1px solid var(--bg-2);
+    font-size:14.5px;
+  }
+  .cert-name{ color:var(--ink-0); }
+  .cert-issuer{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-2);
+    white-space:nowrap;
+  }
+
+  /* ---------- languages ---------- */
+  .lang-row{
+    display:flex;
+    gap:48px;
+    flex-wrap:wrap;
+  }
+  .lang-item dt{
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .lang-item dd{
+    margin:0;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-2);
+  }
+
+  /* ---------- contact / footer ---------- */
+  footer{
+    padding:80px 0 60px;
+  }
+  footer h2{ margin-bottom:14px; }
+  footer .lede{ margin-bottom:36px; }
+  .contact-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .contact-links a{
+    text-decoration:none;
+    font-family:var(--mono);
+    font-size:14px;
+    color:var(--ink-0);
+    border:1px solid var(--bg-2);
+    padding:12px 20px;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .contact-links a:hover{
+    border-color:var(--teal);
+    color:var(--teal);
+  }
+  .foot-note{
+    margin-top:56px;
+    font-size:12.5px;
+    color:var(--ink-2);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    .about-grid{ grid-template-columns:1fr; gap:32px; }
+    .project-grid{ grid-template-columns:1fr; }
+    .skills-grid{ grid-template-columns:repeat(2, 1fr); }
+    .cert-grid{ grid-template-columns:1fr; }
+    .edu-item{ grid-template-columns:1fr; gap:4px; }
+  }
+  @media (max-width:600px){
+    .wrap{ padding:0 20px; }
+    .nav-inner{ padding:16px 20px; }
+    .nav-links{ gap:16px; }
+    .nav-links a{ font-size:13px; }
+    .hero{ padding:64px 0 56px; }
+    section{ padding:56px 0; }
+    .skills-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="nav-mark">unni.rengan</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="status-line">
+      <span class="status-dot"></span>
+      open to opportunities
+    </div>
+
+    <h1 class="name">Unni Rengan</h1>
+
+    <p class="role">
+      IT infrastructure officer and AI/ML engineer working across enterprise
+      web servers, core banking systems and applied machine learning, based in
+      Ernakulam, Kerala.
+    </p>
+
+    <div class="hero-links">
+      <a href="mailto:unnirengan11@gmail.com">unnirengan11@gmail.com</a>
+
+      <a
+        href="https://www.linkedin.com/in/unni-rengan-563128311"
+        target="_blank"
+        rel="noopener"
+      >
+        linkedin.com/in/unni-rengan
+      </a>
+
+      <a
+        href="https://github.com/unnirengan"
+        target="_blank"
+        rel="noopener"
+      >
+        github.com/unnirengan
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="unniport.png" alt="Unni Rengan" />
+  </div>
+</section>
+
+  <section id="about">
+    <div class="section-head">
+      <h2>About</h2>
+      <span class="section-tag">profile</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-copy">
+        <p>I hold a Master of Technology in Computer Science Engineering, specialised in Artificial Intelligence and Software Engineering, built on an earlier degree in Electrical and Electronics Engineering. That combination is what shapes how I work: comfortable moving between machine learning experiments and the physical and network infrastructure that keeps systems running.</p>
+        <p>Day to day, I support enterprise IT operations at a bank — web servers, reverse proxies, core banking software and the Linux and AIX systems underneath them — while continuing to build and ship AI/ML projects on the side.</p>
+      </div>
+      <dl class="about-facts">
+        <div class="fact">
+          <dt>Based in</dt>
+          <dd>Ernakulam, Kerala, India</dd>
+        </div>
+        <div class="fact">
+          <dt>Currently</dt>
+          <dd>IT Support Officer, Federal Bank</dd>
+        </div>
+        <div class="fact">
+          <dt>Focus</dt>
+          <dd>IT infrastructure · AI &amp; ML · Data Science</dd>
+        </div>
+        <div class="fact">
+          <dt>Languages</dt>
+          <dd>English, Hindi, Malayalam</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <h2>Experience</h2>
+      <span class="section-tag">2023 — present</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-date">Jul 2025 — Present</div>
+        <h3 class="tl-role">IT Support Officer</h3>
+        <div class="tl-org">Federal Bank</div>
+        <p class="tl-desc">Provide technical support and troubleshooting for internal banking systems, manage hardware and software issues, and assist with network configuration. Working hands-on with Apache HTTPD, Apache Tomcat, Nginx and HAProxy, including basic reverse proxy configuration and load balancing under senior supervision. Gaining practical exposure to Linux and IBM AIX administration, Oracle database environments and the Finacle Core Banking Solution, alongside IT ticket resolution and user onboarding.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">Sep 2024 — Mar 2025</div>
+        <h3 class="tl-role">Real-Time Data Acquisition &amp; Monitoring</h3>
+        <div class="tl-org">NPOL, Kochi</div>
+        <p class="tl-desc">Built a real-time, multi-channel data acquisition and monitoring system over UDP, with low-latency transmission, signal analysis (FFT, amplitude, phase) and a GUI for live monitoring of network parameters.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">Jun 2024 — Jul 2024</div>
+        <h3 class="tl-role">Internship — Emerging Technologies (AI &amp; Cloud)</h3>
+        <div class="tl-org">Remote / Virtual</div>
+        <p class="tl-desc">Focused on cloud computing, AI and data analytics: hands-on AI/ML experiments, data analysis and chatbot development using IBM Cloud and AutoAI in a collaborative virtual environment.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">Apr 2023 — Jul 2023</div>
+        <h3 class="tl-role">Graduate Apprentice — Electrical</h3>
+        <div class="tl-org">Cochin Port Authority</div>
+        <p class="tl-desc">Repaired and overhauled electrical equipment and transformers of various ratings. Operated and maintained HT circuit breakers (OCB, VCB, ACB), overhead lines, HT/LT underground cables and cable-jointing works, with exposure to a 110 kV substation running SCADA.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <span class="section-tag">selected work</span>
+    </div>
+    <div class="project-grid">
+
+      <div class="project">
+        <div class="project-file">sarcasm-detection.ml</div>
+        <h3>Sarcasm Detection</h3>
+        <p>A machine learning model trained on a labelled dataset of sarcastic and non-sarcastic sentences to classify sarcasm in text.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-file">leaf-disease-cnn.py</div>
+        <h3>Leaf Disease Detection</h3>
+        <p>A CNN built with TensorFlow to detect disease in coffee leaves from image data.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-file">udp-daq-monitor.py</div>
+        <h3>Real-Time Multi-Channel Data Acquisition</h3>
+        <p>A low-latency system for acquiring and monitoring multi-channel data over the UDP protocol, with a live monitoring GUI.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-file">plc-conveyor.st</div>
+        <h3>PLC-Controlled Conveyor</h3>
+        <p>A conveyor system automated and controlled using a Programmable Logic Controller.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="section-tag">toolbox</span>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-mod">
+        <h3>Programming</h3>
+        <ul>
+          <li>C++</li>
+          <li>Python</li>
+        </ul>
+      </div>
+
+      <div class="skill-mod">
+        <h3>AI &amp; Data</h3>
+        <ul>
+          <li>Machine Learning</li>
+          <li>Data Science</li>
+          <li>Artificial Intelligence</li>
+        </ul>
+      </div>
+
+      <div class="skill-mod">
+        <h3>Infrastructure</h3>
+        <ul>
+          <li>Apache Tomcat</li>
+          <li>Apache HTTPD</li>
+          <li>Nginx</li>
+          <li>HAProxy</li>
+          <li>Reverse Proxy Config</li>
+          <li>Finacle (CBS)</li>
+        </ul>
+      </div>
+
+      <div class="skill-mod">
+        <h3>Working style</h3>
+        <ul>
+          <li>Interpersonal Skills</li>
+          <li>Quick Learner</li>
+          <li>Critical Thinking</li>
+          <li>Problem Solving</li>
+          <li>Public Speaking</li>
+          <li>Team Collaboration</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head">
+      <h2>Education</h2>
+      <span class="section-tag">2015 — 2025</span>
+    </div>
+    <div class="edu-list">
+
+      <div class="edu-item">
+        <div class="edu-year">2023 – 2025</div>
+        <div>
+          <div class="edu-degree">M.Tech, Computer Science Engineering — AI &amp; Software Engineering</div>
+          <div class="edu-org">Cochin University of Science &amp; Technology</div>
+        </div>
+        <div class="edu-cgpa">CGPA 7.61</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-year">2017 – 2022</div>
+        <div>
+          <div class="edu-degree">B.Tech, Electrical &amp; Electronics Engineering</div>
+          <div class="edu-org">Cochin University of Science &amp; Technology, School of Engineering</div>
+        </div>
+        <div class="edu-cgpa">CGPA 7.88</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-year">2017</div>
+        <div>
+          <div class="edu-degree">Higher Secondary</div>
+          <div class="edu-org">Bharatiya Vidya Bhavan School, Kozhikode · CBSE</div>
+        </div>
+        <div class="edu-cgpa">CGPA 7.24</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-year">2015</div>
+        <div>
+          <div class="edu-degree">SSLC</div>
+          <div class="edu-org">Bharatiya Vidya Bhavan School, Kozhikode · CBSE</div>
+        </div>
+        <div class="edu-cgpa">CGPA 8.6</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="section-head">
+      <h2>Certifications</h2>
+      <span class="section-tag">continuing education</span>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-item"><span class="cert-name">Placement Assistance Program</span><span class="cert-issuer">IBM SkillsBuild</span></div>
+      <div class="cert-item"><span class="cert-name">Data Fundamentals</span><span class="cert-issuer">IBM SkillsBuild</span></div>
+      <div class="cert-item"><span class="cert-name">Project Management Fundamentals</span><span class="cert-issuer">IBM SkillsBuild</span></div>
+      <div class="cert-item"><span class="cert-name">Getting Started with Enterprise-Grade AI</span><span class="cert-issuer">IBM SkillsBuild</span></div>
+      <div class="cert-item"><span class="cert-name">Getting Started with Enterprise Data Science</span><span class="cert-issuer">IBM SkillsBuild</span></div>
+      <div class="cert-item"><span class="cert-name">Data Analytics Internship Plan</span><span class="cert-issuer">CSRBOX</span></div>
+      <div class="cert-item"><span class="cert-name">AI for Students: Build Your Own Generative AI Model</span><span class="cert-issuer">NXT WAVE</span></div>
+      <div class="cert-item"><span class="cert-name">Industrial Automation</span><span class="cert-issuer">Govt. ITI Kalamassery</span></div>
+      <div class="cert-item"><span class="cert-name">R Programming</span><span class="cert-issuer">Udemy</span></div>
+      <div class="cert-item"><span class="cert-name">Applied Accelerated Artificial Intelligence</span><span class="cert-issuer">NPTEL, Jul 2024</span></div>
+    </div>
+  </section>
+
+  <section id="languages">
+    <div class="section-head">
+      <h2>Languages</h2>
+      <span class="section-tag">C2 = proficient user</span>
+    </div>
+    <dl class="lang-row">
+      <div class="lang-item">
+        <dt>English</dt>
+        <dd>C2 · Fluent</dd>
+      </div>
+      <div class="lang-item">
+        <dt>Hindi</dt>
+        <dd>C2 · Fluent</dd>
+      </div>
+      <div class="lang-item">
+        <dt>Malayalam</dt>
+        <dd>Native</dd>
+      </div>
+    </dl>
+  </section>
+
+  <footer id="contact">
+    <h2>Get in touch</h2>
+    <p class="lede">Based in Ernakulam, Kerala. Reach out by email or connect on LinkedIn and GitHub.</p>
+    <div class="contact-links">
+      <a href="mailto:unnirengan11@gmail.com">Email — unnirengan11@gmail.com</a>
+      <a href="https://www.linkedin.com/in/unni-rengan-563128311" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/unnirengan" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="foot-note">Unni Rengan · Ernakulam, Kerala, India</p>
+  </footer>
+
+</main>
+
+</body>
+</html>
